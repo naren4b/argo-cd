@@ -7,7 +7,7 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: local-path
+            storageClassName: standard
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
@@ -46,7 +46,7 @@ kube-prometheus-stack:
       enabled: false
     persistence:
       enabled: true
-      storageClassName: local-path
+      storageClassName: standard
       accessModes: ["ReadWriteOnce"]
       size: 5Gi
 
@@ -58,7 +58,7 @@ kube-prometheus-stack:
       storage:
       volumeClaimTemplate:
         spec:
-          storageClassName: local-path
+          storageClassName: standard
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:

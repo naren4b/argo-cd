@@ -1,7 +1,7 @@
 global:
    domain:
     ext: 127.0.0.1.nip.io
-    storageClassName: local-path
+    storageClassName: standard
 chartmuseum:
   replicaCount: 1
   strategy:

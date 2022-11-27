@@ -10,5 +10,5 @@ spec:
   resources:
     requests:
       storage: "2Gi"
-  storageClassName: {{ .Values.global.storageClassName | default "local-path" }}
+  storageClassName: {{ .Values.global.storageClassName | default "standard" }}
 
