@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: chartmuseum-storage
+  labels:
+    app.kubernetes.io/name: chartmuseum
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "2Gi"
+  storageClassName: {{ .Values.global.storageClassName | default "local-path" }}
+

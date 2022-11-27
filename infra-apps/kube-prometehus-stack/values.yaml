@@ -1,0 +1,154 @@
+kube-prometheus-stack:
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      selfMonitor: false
+    prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: local-path
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 5Gi
+
+      additionalServiceMonitors:
+      - name: "loki-monitor"
+        selector:
+          matchLabels:
+            app: loki
+            release: loki
+        namespaceSelector:
+          matchNames:
+            - loki-stack
+        endpoints:
+          - port: "http-metrics"
+      - name: "promtail-monitor"
+        selector:
+          matchLabels:
+            app: promtail
+            release: loki
+        namespaceSelector:
+          matchNames:
+            - loki-stack
+        endpoints:
+          - port: "http-metrics"
+          
+  grafana:
+    enabled: true
+    ingress:
+      enabled: true
+      hosts:
+        - grafana.127.0.0.1.nip.io   
+      tls:
+    serviceMonitor:
+      enabled: false
+    persistence:
+      enabled: true
+      storageClassName: local-path
+      accessModes: ["ReadWriteOnce"]
+      size: 5Gi
+
+  alertmanager:
+    enabled: true
+    serviceMonitor:
+      selfMonitor: false
+    alertmanagerSpec:  
+      storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: local-path
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+
+  loki:
+    enabled: true
+    serviceMonitor:
+      enabled: false
+
+  promtail:
+    enabled: true
+    serviceMonitor:
+      enabled: false
+
+  kubeControllerManager:
+    service:
+      enabled: true
+      ports:
+        http: 10257
+      targetPorts:
+        http: 10257
+    serviceMonitor:
+      enabled: false
+      https: false
+      insecureSkipVerify: "true"
+
+  kubeProxy:
+    enabled: false
+    service:
+      enabled: true
+      port: 10249
+      targetPort: 10249
+
+  kubeScheduler:
+    service:
+      enabled: true
+      ports:
+        http: 10259
+      targetPorts:
+        http: 10259
+    serviceMonitor:
+      enabled: false
+      https: false
+      insecureSkipVerify: "true"
+  
+  kubeEtcd:
+    enabled: true
+    serviceMonitor:
+      enabled: false
+    service:
+      targetPort: 2381
+
+  kubeStateMetrics:
+    enabled: true
+
+  kube-state-metrics:
+    selfMonitor:
+      enabled: true
+    prometheus:
+      monitor:
+        enabled: true
+
+  promethues-node-exporter:
+    podLabel:
+      jobLabel: node-exporter
+    service:
+      portName: http-metrics
+    prometheus:
+      monitor:
+        enabled: true
+    resources:
+      requests:
+        memory: 512Mi
+        cpu: 250m
+      limits:
+        memory: 2048Mi
+
+  prometheusOperator:
+    enabled: true
+    serviceMonitor:
+      selfMonitor: false
+    prometheusConfigReloader:
+      resources:
+        requests:
+          cpu: 200m
+          memory: 50Mi
+        limits:
+          memory: 100Mi
+  
+
+
+

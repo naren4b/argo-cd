@@ -1,0 +1,6 @@
+ingress-nginx:
+  controller:
+    kind: DaemonSet
+    image:
+      repository: 
+      tag: 

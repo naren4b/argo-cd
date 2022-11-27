@@ -1,0 +1,35 @@
+global:
+   domain:
+    ext: 127.0.0.1.nip.io
+    storageClassName: local-path
+chartmuseum:
+  replicaCount: 1
+  strategy:
+    type: RollingUpdate
+  image:
+    repository: ghcr.io/helm/chartmuseum
+    tag: v0.15.0
+    pullPolicy: IfNotPresent
+  env:
+    open:
+      STORAGE: local
+      DISABLE_API: false
+    existingSecret: chartmuseum-secret
+    existingSecretMappings:
+      BASIC_AUTH_USER: basic-auth-user
+      BASIC_AUTH_PASS: basic-auth-pass
+
+  ingress:
+    enabled: false
+
+  bearerAuth:
+    secret:
+      enabled: false
+  service:
+    servicename: "chartmuseum"
+    type: ClusterIP
+    externalPort: 8080
+  persistence:
+    enabled: true
+    existingClaim: chartmuseum-storage
+
