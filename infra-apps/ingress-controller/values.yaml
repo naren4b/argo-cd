@@ -4,3 +4,5 @@ ingress-nginx:
     image:
       repository: 
       tag: 
+  nodeSelector:
+    ingress-ready: "true"
