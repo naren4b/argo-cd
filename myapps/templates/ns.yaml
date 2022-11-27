@@ -1,0 +1,10 @@
+{{- range $.Values.accounts }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{.name}}
+spec: {}
+status: {}
+
+{{- end }}    

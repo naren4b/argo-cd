@@ -1,7 +1,0 @@
-apiVersion: v1
-data:
-  address: {{.Values.address}}
-  name: {{.Values.name}}
-kind: ConfigMap
-metadata:
-  name: Showroom
