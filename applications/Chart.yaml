@@ -8,6 +8,6 @@ appVersion: "1.1.0"
 dependencies:
 - name: myApp
   version: "1.1.0"
-  repository: "http://curator:mypassword@chartmuseum.127.0.0.1.nip.io/api/charts"  
+  repository: "http://chartmuseum.chartmuseum:8080/api/charts"  
 
 
