@@ -6,7 +6,7 @@ https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generato
 ```
 clusterName=demo
 cd init
-bash install ${clusterName}
+bash install.sh 
 ```
 
 # Install argocd 
@@ -31,4 +31,16 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 argocd login localhost:8080  --insecure
 argocd account update-password
 
+```
+# Add repos
+```
+username=username
+password=password
+name=name
+
+argocd repo add --type git --name ${name} https://github.com/naren4b/argo-cd.git --username ${username} --password ${password}
+username=username
+password=password
+name=name
+argocd repo add --type helm --name ${name}  http://chartmuseum.chartmuseum:8080/ --username ${username} --password ${password}
 ```
