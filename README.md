@@ -10,12 +10,7 @@ bash install.sh
 ```
 
 # Install argocd 
-```
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-or 
-
-```
+[Install ArgoCD](./init/argocd/README.md)
 
 # Install argod-client
 ```
