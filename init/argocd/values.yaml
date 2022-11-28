@@ -58,7 +58,7 @@ argo-cd:
   configs:
     repositories:
       private-helm-repo:
-        url: http://chartmuseum:8080/
+        url: http://chartmuseum.chartmuseum:8080/
         name: chartmuseum
         type: helm
         password: mypassword

@@ -29,7 +29,7 @@ rm argocd-linux-amd64
 ```
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-argocd login localhost:8080  --insecure
+argocd login argocd.127.0.0.1.nip.io  --insecure
 argocd account update-password
 
 ```
