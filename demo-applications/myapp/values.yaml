@@ -2,6 +2,6 @@ global:
   domain:
     ext: 127.0.0.1.nip.io
 myapp:    
- name: demo-v1.1.0 
+ name: demo
 
  
