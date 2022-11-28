@@ -4,4 +4,6 @@ ingress-nginx:
     nodeSelector:
       ingress-ready: "true"
     hostPort:
-      enabled: true      
+      enabled: true
+    admissionWebhooks:
+     enabled: false

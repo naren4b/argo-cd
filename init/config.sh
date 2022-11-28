@@ -1,6 +1,7 @@
 #!/bin/sh
 
-KIND_CLUSTER_NAME=demo
+read -p "Enter the cluster Name: " cluster_name
+KIND_CLUSTER_NAME=$cluster_name
 KIND_NODE_VERSION=v1.23.12
 
 reg_name='kind-registry'
