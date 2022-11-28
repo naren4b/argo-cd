@@ -1,0 +1,37 @@
+ {{- range $.Values.accounts }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{.name}}-argoapp
+  namespace: oss-infra-util
+spec:
+  project: default
+  source:
+{{ if eq .source.type "git" }}
+    repoURL: {{ required "git repo url " .source.git.repoURL }}
+    targetRevision:  {{ required "git repo target revision " .source.git.targetRevision }}
+    path: {{ required "chart path " .source.git.path | default "oss-mediator-helm-charts" }}
+    helm:
+      valueFiles: 
+      {{- range $valueFile := .source.git.valueFiles }}
+        - {{ $valueFile }}
+      {{- end }}
+
+{{-  else if eq .source.type "chart"}}
+    chart: {{ required "chart name " .source.chart.name }}
+    repoURL: {{required "chart repo URL " .source.chart.repoURL | default "http://chartmuseum:8080/" }}
+    targetRevision: {{required "chart targetRevision  " .source.chart.targetRevision }}
+    helm:
+      releaseName: {{ required "chart name " .source.chart.name }}
+{{- end }}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: {{.name}}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+
+{{- end }}    

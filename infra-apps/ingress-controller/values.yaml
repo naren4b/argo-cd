@@ -1,6 +1,7 @@
 ingress-nginx:
   controller:
     kind: DaemonSet
-    image:
-      repository: 
-      tag: 
+    nodeSelector:
+      ingress-ready: "true"
+    hostPort:
+      enabled: true      
