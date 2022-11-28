@@ -8,12 +8,12 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/naren4b/argo-cd.git
-      revision: staging
+      revision: v1.1.5
       directories:
       - path: infra-apps/*
   - git:
       repoURL: https://github.com/naren4b/argo-cd.git
-      revision: staging
+      revision: v1.1.5
       directories:
       - path: applications/*      
   template:
@@ -23,7 +23,7 @@ spec:
       project: "default"
       source:
         repoURL: https://github.com/naren4b/argo-cd.git
-        targetRevision: staging
+        targetRevision: v1.1.5
         path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
