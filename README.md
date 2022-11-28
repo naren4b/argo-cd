@@ -6,15 +6,11 @@ https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generato
 ```
 clusterName=demo
 cd init
-bash install ${clusterName}
+bash install.sh 
 ```
 
 # Install argocd 
-```
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-
-```
+[Install ArgoCD](./init/argocd/README.md)
 
 # Install argod-client
 ```
@@ -28,7 +24,19 @@ rm argocd-linux-amd64
 ```
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-argocd login localhost:8080  --insecure
+argocd login argocd.127.0.0.1.nip.io  --insecure
 argocd account update-password
 
+```
+# Add repos
+```
+username=username
+password=password
+name=name
+
+argocd repo add --type git --name ${name} https://github.com/naren4b/argo-cd.git --username ${username} --password ${password}
+username=username
+password=password
+name=name
+argocd repo add --type helm --name ${name}  http://chartmuseum.chartmuseum:8080/ --username ${username} --password ${password}
 ```

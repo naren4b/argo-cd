@@ -3,11 +3,10 @@ kind: Ingress
 metadata:
   labels:
     app.kubernetes.io/component: server
-    app.kubernetes.io/instance: oss-argocd
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name:   chartmuseum-server
     app.kubernetes.io/part-of: chartmuseum
-  name: oss-chartmuseum-server
+  name: chartmuseum-server
 spec:
   ingressClassName: nginx
   rules:

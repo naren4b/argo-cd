@@ -15,7 +15,7 @@ spec:
       repoURL: https://github.com/naren4b/argo-cd.git
       revision: v1.1.5
       directories:
-      - path: applications/*      
+      - path: demo-applications/*      
   template:
     metadata:
       name: '{{.path.basename}}'

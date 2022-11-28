@@ -1,0 +1,71 @@
+argo-cd:
+  server:
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
+      hosts:
+        - argocd.127.0.0.1.nip.io
+    extraArgs:
+      - --insecure
+    metrics:
+    # -- Deploy metrics service
+     enabled: false
+     serviceMonitor:
+       enabled: false      
+  dex:
+    metrics:
+    # -- Deploy metrics service
+     enabled: false
+     serviceMonitor:
+       enabled: false
+
+  redis:
+    metrics:
+    # -- Deploy metrics service
+     enabled: false
+     serviceMonitor:
+       enabled: false
+  
+  repoServer:
+    metrics:
+    # -- Deploy metrics service
+     enabled: false
+     serviceMonitor:
+       enabled: false
+
+  notifications:
+    metrics:
+    # -- Deploy metrics service
+     enabled: false
+     serviceMonitor:
+       enabled: false   
+
+  applicationSet:
+    metrics:
+    # -- Deploy metrics service
+     enabled: false
+     serviceMonitor:
+       enabled: false 
+  
+  controller:
+    metrics:
+    # -- Deploy metrics service
+     enabled: false
+     serviceMonitor:
+       enabled: false
+
+       
+  configs:
+    repositories:
+      private-helm-repo:
+        url: http://chartmuseum.chartmuseum:8080/
+        name: chartmuseum
+        type: helm
+        password: mypassword
+        username: curator
+
+
+
+    secret:
+      createSecret: true
+      argocdServerAdminPassword: "$2a$10$t1zoJJ3XhAynOmH.3nSXcuugms7CLx4rOnpBNg11iFhPlVkyGtcnu"
