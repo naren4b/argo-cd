@@ -1,0 +1,47 @@
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: "argocd-agent"
+
+gitrepos:
+  myRepo1:  
+    name: myRepo1
+    url: https://github.com/naren4b/demo-app.git
+    username: naren4b
+    token: ""
+  myRepo2:
+    name: myRepo2
+    url: https://github.com/naren4b/another-demo-app.git
+    username: naren4b
+    token: ""
+
+clusters:
+  myCluster1: 
+    name: my-cluster
+    server: "https://my-cluster-server"
+    caData: "my-ca-data"
+    token: "my-bearer-token"
+    insecure: false
+    argocd:
+      enabled: true
+      application:
+        name: my-cluster-argocd
+        source:
+          chart: argo-cd
+          repoURL: https://argoproj.github.io/argo-helm
+          targetRevision: 7.3.4 
+          helm:
+            releaseName: my-cluster-argocd
+        destination:
+          server: "https://my-cluster-server"
+          namespace: argocd
+
+  anotherCluster:   
+    name: another-cluster
+    server: "https://another-cluster-server"
+    caData: "another-ca-data"
+    token: "another-bearer-token"
+    insecure: false
+    argocd:
+      enabled: false

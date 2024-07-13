@@ -1,0 +1,17 @@
+{{- range .Values.applications }}
+apiVersion: {{ .apiVersion }}
+kind: Application
+metadata:
+  name: {{ .metadata.name }}
+  namespace: {{ .metadata.namespace }}
+spec:
+  project: {{ .spec.project }}
+  source:
+    repoURL: {{ .spec.source.repoURL }}
+    targetRevision: {{ .spec.source.targetRevision }}
+    path: {{ .spec.source.path }}
+  destination:
+    server: {{ .spec.destination.server }}
+    namespace: {{ .spec.destination.namespace }}
+---
+{{- end }}

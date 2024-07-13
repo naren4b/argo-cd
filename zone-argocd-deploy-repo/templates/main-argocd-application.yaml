@@ -1,0 +1,21 @@
+{{- range $key, $value := .Values.clusters }}
+{{- if $value.argocd.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $value.argocd.application.name }}
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: {{ $value.argocd.application.source.chart }}
+    repoURL: {{ $value.argocd.application.source.repoURL }}
+    targetRevision: {{ $value.argocd.application.source.targetRevision }}
+    helm:
+      releaseName: {{ $value.argocd.application.source.helm.releaseName }}
+  destination:
+    server: {{ $value.argocd.application.destination.server }}
+    namespace: {{ $value.argocd.application.destination.namespace }}
+---
+{{- end }}
+{{- end }}

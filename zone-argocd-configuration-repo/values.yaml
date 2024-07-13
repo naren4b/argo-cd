@@ -1,0 +1,59 @@
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: "argocd-agent"
+
+gitrepos:
+  myRepo1:  
+    name: myRepo1
+    url: https://github.com/naren4b/demo-app.git
+    username: naren4b
+    token: ""
+  myRepo2:
+    name: myRepo2
+    url: https://github.com/argoproj/argocd-example-apps.git
+    username: naren4b
+    token: ""
+
+clusters:
+  myCluster1: 
+    name: my-cluster
+    server: "https://kubernetes.default.svc"
+    caData: "my-ca-data"
+    token: "my-bearer-token"
+    insecure: false
+  anotherCluster:   
+    name: another-cluster
+    server: "https://another-cluster-server"
+    caData: "another-ca-data"
+    token: "another-bearer-token"
+    insecure: false
+    
+applications:
+  - apiVersion: argoproj.io/v1alpha1
+    metadata:
+      name: guestbook
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/argoproj/argocd-example-apps.git
+        targetRevision: HEAD
+        path: guestbook
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: guestbook
+  - apiVersion: argoproj.io/v1alpha1
+    metadata:
+      name: another-guestbook
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/argoproj/argocd-example-apps.git
+        targetRevision: HEAD
+        path: another-guestbook
+      destination:
+        server: https://another-cluster-server
+        namespace: another-guestbook
