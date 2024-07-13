@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zone-argocd-application
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/naren4b/argo-cd.git
+    targetRevision: HEAD
+    path: zone-argocd-configuration-repo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
