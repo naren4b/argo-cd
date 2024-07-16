@@ -30,30 +30,7 @@ clusters:
     token: "another-bearer-token"
     insecure: false
     
-applications:
-  - apiVersion: argoproj.io/v1alpha1
-    metadata:
-      name: guestbook
-      namespace: argocd
-    spec:
-      project: default
-      source:
-        repoURL: https://github.com/argoproj/argocd-example-apps.git
-        targetRevision: HEAD
-        path: guestbook
-      destination:
-        server: https://kubernetes.default.svc
-        namespace: guestbook
-  - apiVersion: argoproj.io/v1alpha1
-    metadata:
-      name: another-guestbook
-      namespace: argocd
-    spec:
-      project: default
-      source:
-        repoURL: https://github.com/argoproj/argocd-example-apps.git
-        targetRevision: HEAD
-        path: another-guestbook
-      destination:
-        server: https://another-cluster-server
-        namespace: another-guestbook
+applicationSet:
+ guestbook: 
+  enable: false
+  
