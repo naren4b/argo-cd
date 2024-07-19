@@ -1,9 +1,3 @@
-serviceAccount:
-  create: true
-  automount: true
-  annotations: {}
-  name: "argocd-agent"
-
 gitrepos:
   myRepo1:  
     name: myRepo1
@@ -31,6 +25,6 @@ clusters:
     insecure: false
     
 applicationSet:
- guestbook: 
-  enable: false
+ myapp: 
+  enable: true
   

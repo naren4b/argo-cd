@@ -1,0 +1,14 @@
+clusters:
+  myCluster1: 
+    name: my-cluster
+    server: "https://kubernetes.default.svc"
+    caData: "my-ca-data"
+    token: "my-bearer-token"
+    insecure: false
+  anotherCluster:   
+    name: another-cluster
+    server: "https://another-cluster-server"
+    caData: "another-ca-data"
+    token: "another-bearer-token"
+    insecure: false
+ 

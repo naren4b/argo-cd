@@ -1,21 +1,21 @@
-{{ if .Values.applicationSet.guestbook.enable  }}
+{{ if .Values.applicationSet.myapp.enable  }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: demo-app-applicationset
+  name: my-app-applicationset
   namespace: argocd
 spec:
   generators:
   - clusters: {}
   template:
     metadata:
-      name: '{{ "{{" }}name{{ "}}" }}-guestbook'
+      name: '{{ "{{" }}name{{ "}}" }}-my-app'
     spec:
       project: "default"
       source:
-        repoURL: https://github.com/argoproj/argocd-example-apps.git
-        targetRevision: HEAD
-        path: guestbook
+		    repoURL: https://github.com/naren4b/argo-cd.git
+		    targetRevision: HEAD
+		    path: charts/my-app
       destination:
         server: '{{ "{{" }}server{{ "}}" }}'
 {{ end}}
