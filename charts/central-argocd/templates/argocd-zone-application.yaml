@@ -15,12 +15,12 @@ spec:
     - repoURL: 'https://github.com/naren4b/argo-cd.git'
       targetRevision: HEAD
       path: charts/zone-argocd
-      helm:
-          valueFiles:
-            - $values/{{ $value.name }}-argocd-cluster-secrets-values.yaml   #TODO      
-    - repoURL: 'https://github.com/naren4b/naren4b-config.git'
-      targetRevision: HEAD
-      ref: values
+    #   helm:
+    #       valueFiles:
+    #         - $values/{{ $value.name }}-argocd-cluster-secrets-values.yaml   #TODO      
+    # - repoURL: 'https://github.com/naren4b/naren4b-config.git'
+    #   targetRevision: HEAD
+    #   ref: values
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
