@@ -1,9 +1,11 @@
+{{if .Values.cluster.secret.enabled }}
+{{- range $key, $value := .Values.clusters }}
 {{ if .Values.applicationSet.myapp.enable  }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: my-app-applicationset
-  namespace: argocd
+  namespace: {{ $value.name }}-zone-argocd
 spec:
   generators:
   - clusters: {}
@@ -22,4 +24,6 @@ spec:
       syncPolicy:
          syncOptions:
           - CreateNamespace=true
-{{ end}}
+{{- end}}
+{{- end }}
+{{- end }}
