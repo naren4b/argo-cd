@@ -11,11 +11,15 @@ spec:
     metadata:
       name: '{{ "{{" }}name{{ "}}" }}-my-app'
     spec:
-      project: "default"
       source:
-		    repoURL: https://github.com/naren4b/argo-cd.git
-		    targetRevision: HEAD
-		    path: charts/my-app
+        repoURL: 'https://github.com/naren4b/argo-cd.git'
+        targetRevision: 'HEAD'
+        path: charts/my-app
+      project: "default"
       destination:
-        server: '{{ "{{" }}server{{ "}}" }}'
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+         syncOptions:
+          - CreateNamespace=true
 {{ end}}
