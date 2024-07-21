@@ -1,0 +1,27 @@
+{{if .Values.gitrepo.secret.enabled }}
+{{- range $key, $value := .Values.clusters }}
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ $value.name }}-secret
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repo-creds
+spec:
+  description: {{ $value.name }} project
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: {{ $value.name }}
+    server: {{ $value.server }}
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+---
+{{- end }}
+{{- end }}
+
+
