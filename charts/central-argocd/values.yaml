@@ -6,7 +6,7 @@ ref: values
 cluster:
    secret:
      enabled: true # If false add your own cluster secrets 
-# clusters:
+clusters:
 #   kubernetes: 
 #     name: kubernetes
 #     server: https://172.30.1.2:6443
@@ -16,9 +16,9 @@ cluster:
 gitrepo:
    secret:
      enabled: true # If false add your own git secrets 
-# gitrepos:
+gitrepos:
 #   naren4b:  
 #     name: naren4b
 #     url: https://github.com/naren4b
 #     username: naren4b
-#     token: ""
+#     password: ""

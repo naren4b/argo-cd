@@ -20,8 +20,14 @@ spec:
           helm:
            valueFiles:
              - $values/argocd-cluster-secrets-values.yaml
+      - repoURL: 'https://github.com/naren4b/argo-cd.git'
+        targetRevision: HEAD
+        path: charts/zone-argocd
+        helm:
+           valueFiles:
+             - $values/argocd-cluster-secrets-values.yaml   #TODO      
       - repoURL: 'https://github.com/naren4b/naren4b-config.git'
         targetRevision: HEAD
-        ref: values    
+        ref: values
       destination:
         server: '{{ "{{" }}server{{ "}}" }}'
