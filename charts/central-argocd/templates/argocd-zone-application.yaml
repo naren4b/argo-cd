@@ -1,0 +1,28 @@
+{{if .Values.cluster.secret.enabled }}
+{{- range $key, $value := .Values.clusters }}
+apiVersion: v1
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: {{ $value.name }}-seed-application
+  namespace: argocd
+spec: 
+  destination: 
+    namespace: argocd 
+    server: "https://kubernetes.default.svc"
+  project: default
+  sources:
+    - repoURL: 'https://github.com/naren4b/argo-cd.git'
+      targetRevision: HEAD
+      path: charts/zone-argocd
+      helm:
+          valueFiles:
+            - $values/{{ $value.name }}-argocd-cluster-secrets-values.yaml   #TODO      
+    - repoURL: 'https://github.com/naren4b/naren4b-config.git'
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}
+{{- end }}      
