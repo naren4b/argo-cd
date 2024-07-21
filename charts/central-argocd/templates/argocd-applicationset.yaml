@@ -1,31 +1,31 @@
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: zone-argocd-applicationset
-  namespace: argocd
-spec:
-  generators:
-  - clusters: {}
-  template:
-    metadata:
-      name: '{{ "{{" }}name{{ "}}" }}-zone-argocd'
-    spec:
-      project: "default"
-      sources:
-      - chart: argo-cd
-        repoURL: https://argoproj.github.io/argo-helm
-        targetRevision: 7.3.8
-        helm:
-         values: |-
-          configs:
-           params:
-             server.insecure: true
-      destination:
-        server: '{{ "{{" }}server{{ "}}" }}'
-        namespace: '{{ "{{" }}name{{ "}}" }}-zone-argocd'
-      syncPolicy:
-        automated:
-           allowEmpty: true
-           selfHeal: true
-        syncOptions:
-          - CreateNamespace=true        
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: zone-argocd-applicationset
+#   namespace: argocd
+# spec:
+#   generators:
+#   - clusters: {}
+#   template:
+#     metadata:
+#       name: '{{ "{{" }}name{{ "}}" }}-zone-argocd'
+#     spec:
+#       project: "default"
+#       sources:
+#       - chart: argo-cd
+#         repoURL: https://argoproj.github.io/argo-helm
+#         targetRevision: 7.3.8
+#         helm:
+#          values: |-
+#           configs:
+#            params:
+#              server.insecure: true
+#       destination:
+#         server: '{{ "{{" }}server{{ "}}" }}'
+#         namespace: '{{ "{{" }}name{{ "}}" }}-zone-argocd'
+#       syncPolicy:
+#         automated:
+#            allowEmpty: true
+#            selfHeal: true
+#         syncOptions:
+#           - CreateNamespace=true        
