@@ -11,11 +11,17 @@ spec:
       name: '{{ "{{" }}name{{ "}}" }}-zone-argocd'
     spec:
       project: "default"
-      source:
-        chart: argo-cd
+      sources:
+      - chart: argo-cd
         repoURL: https://argoproj.github.io/argo-helm
         targetRevision: 7.3.8
         helm:
           releaseName: argo-cd
+          helm:
+           valueFiles:
+             - $values/argocd-cluster-secrets-values.yaml
+      - repoURL: 'https://github.com/naren4b/naren4b-config.git'
+        targetRevision: HEAD
+        ref: values    
       destination:
         server: '{{ "{{" }}server{{ "}}" }}'
