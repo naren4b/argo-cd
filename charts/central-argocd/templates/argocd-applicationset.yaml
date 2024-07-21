@@ -31,3 +31,7 @@ spec:
         ref: values
       destination:
         server: '{{ "{{" }}server{{ "}}" }}'
+        namespace: '{{ "{{" }}name{{ "}}" }}-zone-argocd'
+      syncPolicy:
+         syncOptions:
+          - CreateNamespace=true        
