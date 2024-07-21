@@ -10,7 +10,7 @@ spec:
   destination: 
     namespace: argocd 
     server: "https://kubernetes.default.svc"
-  project: {{ $value.name }}
+  project: {{ $value.name }}-project
   sources:
     - repoURL: 'https://github.com/naren4b/argo-cd.git'
       targetRevision: HEAD
