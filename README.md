@@ -6,7 +6,7 @@ https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Generato
 ```
 clusterName=demo
 cd init
-bash install.sh 
+bash install.sh  
 ```
 
 # Install argocd 
