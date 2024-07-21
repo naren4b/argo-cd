@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: {{ $value.name }}-secret
+  name: {{ $value.name }}-project
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repo-creds
