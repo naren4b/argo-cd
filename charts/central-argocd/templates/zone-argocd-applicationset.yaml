@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: zone-argocd-applicationset
+  name: in-cluster-zone-argocd-applicationset
   namespace: in-cluster-zone-argocd
 spec:
   generators:
