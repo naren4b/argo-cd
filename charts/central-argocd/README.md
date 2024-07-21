@@ -1,15 +1,27 @@
 Generate these values and copy to your private repos value files
 #### Update the value file for adding new clusters 
 ```bash
-curl -Os https://gist.githubusercontent.com/naren4b/4af945b244f60d801ca77227cdeda861/raw/a0b28af2e06caaa7806953afdcb171278fe714e7/create-cluster-secret.sh 
-bash create-cluster-secret.sh 
+#!/bin/bash
+echo "Create the Service Account"
+kubectl create sa argocd-manager -n kube-system
+cat<<EOF | kubectl create -f - 
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: argocd-manager
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: "argocd-manager"
+EOF
+# Note Cluster Admin is a full permission (we can check alternative https://github.com/argoproj/argo-cd/issues/5389)
+echo "Create the rolebinding"
+kubectl create clusterrolebinding --clusterrole=cluster-admin --serviceaccount=kube-system:argocd-manager argocd-manager-role
 
-echo "Optional for Helm chart Value file" 
 caData=$(kubectl config view --raw -o jsonpath="{.clusters[0].cluster.certificate-authority-data}")
-token=$(kubectl get secret argocd-agent -n kube-system -o json | jq -r .data.token)
+token=$(kubectl get secret argocd-manager -n kube-system -o json | jq -r .data.token)
 server=$(kubectl config view --raw -o jsonpath="{.clusters[0].cluster.server}")
 name=$(kubectl config view --raw -o jsonpath="{.clusters[0].name}")
-
 cat<<EOF > cluster-secrets-values.yaml  
 clusters:
   ${name}: 
