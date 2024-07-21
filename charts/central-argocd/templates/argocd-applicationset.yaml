@@ -10,7 +10,7 @@ spec:
     metadata:
       name: '{{ "{{" }}name{{ "}}" }}-zone-argocd'
     spec:
-      project: {{ $value.name }}-project
+      project: '{{ "{{" }}name{{ "}}" }}-project'
       sources:
       - chart: argo-cd
         repoURL: https://argoproj.github.io/argo-helm
