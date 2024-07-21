@@ -15,20 +15,11 @@ spec:
       - chart: argo-cd
         repoURL: https://argoproj.github.io/argo-helm
         targetRevision: 7.3.8
-      #   helm:
-      #     releaseName: argo-cd
-      #     helm:
-      #      valueFiles:
-      #        - $values/argocd-cluster-secrets-values.yaml
-      # - repoURL: 'https://github.com/naren4b/argo-cd.git'
-      #   targetRevision: HEAD
-      #   path: charts/zone-argocd
-      #   helm:
-      #      valueFiles:
-      #        - $values/argocd-cluster-secrets-values.yaml   #TODO      
-      # - repoURL: 'https://github.com/naren4b/naren4b-config.git'
-      #   targetRevision: HEAD
-      #   ref: values
+        helm:
+         values: |-
+          configs:
+           params:
+             server.insecure: true
       destination:
         server: '{{ "{{" }}server{{ "}}" }}'
         namespace: '{{ "{{" }}name{{ "}}" }}-zone-argocd'
